@@ -1,0 +1,22 @@
+{% extends 'Base.html' %}
+{% block title %} Города {% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="display-4">Города</h1>
+    <div class="row">
+        <div class="col-md-1">
+            {% for city in cities_list %}
+            <p>{{ city }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {% for city in cities_list %}
+            <p>
+            <a href="{% url 'city:current_city' city.id %}">{{ city.name }}</a></p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
