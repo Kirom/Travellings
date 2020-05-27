@@ -1,0 +1,45 @@
+{% extends 'Base.html' %}
+{% block title %} Маршрут {% endblock %}
+{% block content %}
+<h1 class="display-4 text-center my-4">Маршрут</h1>
+<div class="row">
+<div class="col-md-10 mx-auto">
+    <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Название маршрута</th>
+                        <th scope="col">Откуда</th>
+                        <th scope="col">Куда</th>
+                        <th class="text-center" scope="col">Время в пути</th>
+                        <th scope="col">Транзитные поезда</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+        <tbody>
+        <tr>
+            <td><a href="{% url 'current_route' route.pk %}">{{ object.name }}</a></td>
+            <td>{{ object.from_city }}</td>
+            <td>{{ object.to_city }}</td>
+            <td class="text-center">{{ object.travel_times }}</td>
+            <td>
+            {% for train in object.transit_cities.all %}
+                {{ train }}<br/>
+            {% endfor %}
+            </td>
+            <td><a href="{% url 'delete_route' object.pk %}">
+                <button type="button" class="btn btn-danger">Удалить</button>
+                </a>
+            </td>
+        </tr>
+        <tr>
+        </tbody>
+    </table>
+    <a href="{% url 'routes' %}" class="text-light">
+    <button type="button" class="btn btn-dark my-2">
+        Список маршрутов
+    </button>
+</a>
+    </div>
+</div>
+
+{% endblock %}

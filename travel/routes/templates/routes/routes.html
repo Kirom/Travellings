@@ -1,31 +1,37 @@
 {% extends 'Base.html' %}
-{% block title %} Города {% endblock %}
+{% block title %} Маршруты {% endblock %}
 {% block content %}
-<h1 class="display-4 text-center my-4">Города</h1>
-<div class="col-md-5 mx-auto">
+<h1 class="display-4 text-center my-4">Маршруты</h1>
+<div class="row">
+<div class="col-md-10 mx-auto">
     <table class="table table-striped">
-        <!--            <thead>-->
-        <!--            <tr>-->
-        <!--                <th scope="col">Просмотр городов</th>-->
-        <!--                <th scope="col">Изменение городов</th>-->
-        <!--                <th scope="col">Удаление городов</th>-->
-        <!--            </tr>-->
-        <!--            </thead>-->
+                    <thead>
+                    <tr>
+                        <th scope="col">Название маршрута</th>
+                        <th scope="col">Откуда</th>
+                        <th scope="col">Куда</th>
+                        <th class="text-center" scope="col">Время в пути</th>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
         <tbody>
-        {% for city in page_obj %}
+        {% for route in object_list %}
         <tr>
-            <td><a href="{% url 'city:current_city' city.pk %}">{{ city.name }}</a></td>
-            <td><a href="{% url 'city:update' city.pk %}">
-                <button type="button" class="btn btn-primary">Редактировать</button>
-            </a></td>
-            <td><a href="{% url 'city:delete' city.pk %}">
+            <td><a href="{% url 'current_route' route.pk %}">{{ route.name }}</a></td>
+            <td>{{ route.from_city }}</td>
+            <td>{{ route.to_city }}</td>
+            <td class="text-center">{{ route.travel_times }}</td>
+            <td><a href="{% url 'delete_route' route.pk %}">
                 <button type="button" class="btn btn-danger">Удалить</button>
-            </a></td>
+                </a>
+            </td>
         </tr>
         {% endfor %}
         <tr>
         </tbody>
     </table>
+</div>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
 
@@ -53,8 +59,5 @@
 
         </ul>
     </nav>
-    <a href="{% url 'city:create' %}">
-        <button type="button" class="btn btn-info">Добавить город</button>
-    </a>
 </div>
 {% endblock %}
