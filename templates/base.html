@@ -1,0 +1,106 @@
+{% url 'home' as home_page_url%}
+{% url 'city:home' as city_home_page_url %}
+{% url 'train:home' as train_home_page_url %}
+{% url 'city:create' as city_create_page_url %}
+{% url 'train:create' as train_create_page_url %}
+{% url 'routes' as routes_url %}
+{% url 'login' as login_url %}
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
+    <title>{% block title%} {% endblock%}</title>
+</head>
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+        <a class="navbar-brand" href="#">Travel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item {% if request.path == home_page_url %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item {% if request.path == city_home_page_url %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'city:home' %}">Города</a>
+                </li>
+                <li class="nav-item {% if request.path == train_home_page_url %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'train:home' %}">Поезда</a>
+                </li>
+                <li class="nav-item {% if request.path == routes_url %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'routes' %}">Маршруты</a>
+                </li>
+                <li class="nav-item dropdown {% if request.path == city_create_page_url or request.path == train_create_page_url %} active {% endif %}">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Добавить
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{% url 'city:create' %}">Город</a>
+                        <a class="dropdown-item" href="{% url 'train:create' %}">Поезд</a>
+                    </div>
+                    {% if user.is_authenticated %} <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                </li>
+                    {% else %}
+                    <li class="nav-item {% if request.path == login_url %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                    {% endif %}
+                </li>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+{% if messages %}
+{% for message in messages %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="alert alert-danger {{ message.tags }} my-2 " role="alert">
+            {{ message }}
+        </div>
+    </div>
+    {% else %}
+    <div class="col-md-6 mx-auto">
+        <div class="alert alert-success {{ message.tags }} my-2 " role="alert">
+            {{ message }}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    <div class="container">
+        {% block content %} {% endblock %}
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script>$(document).ready(function () {
+        $('.js-example-basic-single').select2();
+        $('.js-example-basic-multiple').select2();
+    });</script>
+</body>
+</html>
