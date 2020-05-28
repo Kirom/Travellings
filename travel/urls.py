@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from routes.views import home, find_routes, add_route, RouteDeleteView, RouteListView, RouteDetailView
-from travel.views import login_view, logout_view
+from travel.views import login_view, logout_view, registration_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('registration/', registration_view, name='registration'),
     path('', home, name='home'),
     path('cities/', include(('cities.urls', 'city'))),
     path('trains/', include(('trains.urls', 'train'))),

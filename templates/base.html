@@ -5,6 +5,8 @@
 {% url 'train:create' as train_create_page_url %}
 {% url 'routes' as routes_url %}
 {% url 'login' as login_url %}
+{% url 'registration' as registration_url %}
+
 
 
 <!doctype html>
@@ -57,7 +59,11 @@
                 </li>
                     {% else %}
                     <li class="nav-item {% if request.path == login_url %} active {% endif %}">
-                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
+                    <a class="nav-link" href="{% url 'login' %}">Вход</a>
+                    </li>
+                    <li class="nav-item {% if request.path == registration_url %} active {% endif %}">
+                    <a class="nav-link" href="{% url 'registration' %}">Регистрация</a>
+                    </li>
                     {% endif %}
                 </li>
                 </li>
