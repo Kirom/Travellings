@@ -1,5 +1,5 @@
 # Project exclude paths
 /venv/
-travel/travel/settings/local.py
+travel/settings/local.py
 deploy_secret_key
 htmlcov
