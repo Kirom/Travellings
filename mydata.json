@@ -1,0 +1,199 @@
+[
+{
+    "model": "cities.city",
+    "pk": 1,
+    "fields": {
+        "name": "\u0414\u043e\u043d\u0435\u0446\u043a"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 3,
+    "fields": {
+        "name": "\u041a\u0438\u0435\u0432"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 5,
+    "fields": {
+        "name": "\u041b\u044c\u0432\u043e\u0432"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 32,
+    "fields": {
+        "name": "\u0414\u043d\u0435\u043f\u0440"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 35,
+    "fields": {
+        "name": "\u041c\u0430\u0440\u0438\u0443\u043f\u043e\u043b\u044c"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 36,
+    "fields": {
+        "name": "\u0425\u0430\u0440\u044c\u043a\u043e\u0432"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 38,
+    "fields": {
+        "name": "\u041b\u0443\u0433\u0430\u043d\u0441\u043a"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 41,
+    "fields": {
+        "name": "\u0421\u0442\u0430\u0445\u0430\u043d\u043e\u0432"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 43,
+    "fields": {
+        "name": "\u0421\u0435\u043b\u0438\u0434\u043e\u0432\u043e"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 44,
+    "fields": {
+        "name": "\u0414\u0435\u0431\u0430\u043b\u044c\u0446\u0435\u0432\u043e"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 45,
+    "fields": {
+        "name": "\u041a\u0440\u0438\u0432\u043e\u0439 \u0420\u043e\u0433"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 46,
+    "fields": {
+        "name": "\u041f\u0430\u0432\u043b\u043e\u0433\u0440\u0430\u0434"
+    }
+},
+{
+    "model": "cities.city",
+    "pk": 47,
+    "fields": {
+        "name": "\u0427\u0435\u0440\u043d\u0438\u0433\u043e\u0432"
+    }
+},
+{
+    "model": "routes.route",
+    "pk": 9,
+    "fields": {
+        "name": "DNTSK-TR-KR_1",
+        "from_city": "\u0414\u043e\u043d\u0435\u0446\u043a",
+        "to_city": "\u041a\u0440\u0438\u0432\u043e\u0439 \u0420\u043e\u0433",
+        "travel_times": 53,
+        "transit_cities": [
+            4,
+            11,
+            9,
+            6
+        ]
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 1,
+    "fields": {
+        "name": "tr1",
+        "from_city": 1,
+        "to_city": 3,
+        "travel_time": 10
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 4,
+    "fields": {
+        "name": "asd123",
+        "from_city": 1,
+        "to_city": 32,
+        "travel_time": 3
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 6,
+    "fields": {
+        "name": "uebeke1",
+        "from_city": 32,
+        "to_city": 5,
+        "travel_time": 20
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 7,
+    "fields": {
+        "name": "uebok1",
+        "from_city": 3,
+        "to_city": 5,
+        "travel_time": 18
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 9,
+    "fields": {
+        "name": "pl1",
+        "from_city": 35,
+        "to_city": 45,
+        "travel_time": 10
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 10,
+    "fields": {
+        "name": "odk1",
+        "from_city": 3,
+        "to_city": 1,
+        "travel_time": 10
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 11,
+    "fields": {
+        "name": "lm1",
+        "from_city": 5,
+        "to_city": 35,
+        "travel_time": 20
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 12,
+    "fields": {
+        "name": "dkr1",
+        "from_city": 1,
+        "to_city": 45,
+        "travel_time": 10
+    }
+},
+{
+    "model": "trains.train",
+    "pk": 13,
+    "fields": {
+        "name": "asd",
+        "from_city": 1,
+        "to_city": 3,
+        "travel_time": 9
+    }
+}
+]
