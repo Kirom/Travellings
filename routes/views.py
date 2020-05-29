@@ -190,7 +190,7 @@ class RouteListView(ListView):
 class RouteDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     login_url = 'login'
     model = Route
-    # template_name = 'routes/delete.html'
+    template_name = 'routes/delete.html'
     success_url = reverse_lazy('routes')
     success_message = 'Маршрут успешно удален!'
 
