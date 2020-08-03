@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item {% if request.path == home_page_url %} active {% endif %}">
-                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'home' %}">Поиск маршрута <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item {% if request.path == city_home_page_url %} active {% endif %}">
                     <a class="nav-link" href="{% url 'city:home' %}">Города</a>
