@@ -1,7 +1,10 @@
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.hashers import check_password
+
 User = get_user_model()
+
 
 class UserLoginForm(forms.Form):
     username = forms.CharField(label='Логин', widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -13,10 +16,17 @@ class UserLoginForm(forms.Form):
 
         if username and password:
             user = authenticate(username=username, password=password)
-            if not user:
+            try:
+                db_user = User.objects.filter(username=username)[0].username
+                db_password = User.objects.filter(username=username)[0].password
+            except:
+                db_user = "User doesn't exist"
+                db_password = "Password doesn't exist"
+            if username != db_user:
                 raise forms.ValidationError('Такого пользователя не существует')
-            if not password:
+            elif not check_password(password, db_password):
                 raise forms.ValidationError('Неверный пароль')
+
         return super(UserLoginForm, self).clean(*args, **kwargs)
 
 
@@ -28,7 +38,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('username', )
+        fields = ('username',)
 
     def clean_password2(self, *args, **kwargs):
         data = self.cleaned_data
