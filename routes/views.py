@@ -57,7 +57,9 @@ def find_routes(request):
                         total_time += train.travel_time
                     tmp['total_time'] = total_time
                     tmp['trains'].append(qs)
-                if total_time <= travel_time:
+                if travel_time and total_time <= travel_time:
+                    trains.append(tmp)
+                elif not travel_time:
                     trains.append(tmp)
             if not trains:
                 messages.error(request, message='Время в пути больше заданого')
@@ -133,19 +135,15 @@ def add_route(request):
             from_city = data['from_city']
             to_city = data['to_city']
             travel_times = data['travel_times']
-            transit_cities = data['transit_cities']
             # Убираем пробелы из ID поездов
             transit_cities = data['transit_cities'].split(' ')
-            # transit_cities = ast.literal_eval(transit_cities)
             trains = [int(x) for x in transit_cities if x.isalnum()]
             qs = Train.objects.filter(id__in=trains)
             route = Route(name=name, from_city=from_city, to_city=to_city, travel_times=travel_times)
-            # assert False
             route.save()
             for train in qs:
                 route.transit_cities.add(train.id)
             messages.success(request, 'Маршрут успешно сохранен!')
-            # assert False
             return redirect('/')
     else:
         data = request.GET
@@ -157,7 +155,6 @@ def add_route(request):
             transit_cities = data['transit_cities'].split(' ')
             trains = [int(x) for x in transit_cities if x.isnumeric()]
             qs = Train.objects.filter(id__in=trains)
-            train_list = ' '.join([str(i) for i in trains])
             form = RouteModelForm(initial={'from_city': from_city,
                                            'to_city': to_city,
                                            'travel_times': travel_times,
@@ -170,7 +167,6 @@ def add_route(request):
                 route_descriptions.append(dsc)
             context = {'form': form, 'description': route_descriptions, 'from_city': from_city, 'to_city': to_city,
                        'travel_times': travel_times}
-            # assert False
             return render(request, 'routes/create.html', context=context)
         else:
             messages.error(request, 'Невозможно сохранить несуществующий маршрут')
