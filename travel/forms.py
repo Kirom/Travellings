@@ -17,8 +17,8 @@ class UserLoginForm(forms.Form):
         if username and password:
             user = authenticate(username=username, password=password)
             try:
-                db_user = User.objects.filter(username=username)[0].username
-                db_password = User.objects.filter(username=username)[0].password
+                db_user = User.objects.get(username=username).username
+                db_password = User.objects.get(username=username).password
             except:
                 db_user = "User doesn't exist"
                 db_password = "Password doesn't exist"
