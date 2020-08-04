@@ -1,50 +1,53 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block css %}<link href="{% static 'routes/css/style.css' %}" rel="stylesheet"/>{% endblock %}
 {% block title %} Поиск маршрута {% endblock %}
 {% block content %}
 <h1 class="display-4 text-center my-4">Маршруты</h1>
 <div class="col-md-8 mx-auto">
     {% if routes %}
-        {% if routes|length == 1%}
-            <h3 class="text-center">Маршрут из {{cities.from_city}} в {{cities.to_city}} </h3>
-        {% else %}
-            <h3 class="text-center">Маршруты из {{cities.from_city}} в {{cities.to_city}} </h3>
+    {% if routes|length == 1%}
+    <h3 class="text-center">Маршрут из {{cities.from_city}} в {{cities.to_city}} </h3>
+    {% else %}
+    <h3 class="text-center">Маршруты из {{cities.from_city}} в {{cities.to_city}} </h3>
+    {% endif %}
+    <hr>
+    {% for route in routes %}
+    <form action="{% url 'add_route' %}" method="get">
+        <input type="hidden" name="from_city" value="{{route.from_city}}">
+        <input type="hidden" name="to_city" value="{{route.to_city}}">
+        <input type="hidden" name="travel_times" value="{{route.total_time}}">
+        <input type="hidden" name="transit_cities"
+               value="{% for trains_qs in route.route %} {% for train in trains_qs %} {{train.id}} {% endfor %} {% endfor %}">
+        {% if forloop.first %}
+        <h5>Самый короткий маршрут</h5>
         {% endif %}
-        <hr>
-        {% for route in routes %}
-            <form action="{% url 'add_route' %}" method="get">
-                <input type="hidden" name="from_city" value="{{route.from_city}}">
-                <input type="hidden" name="to_city" value="{{route.to_city}}">
-                <input type="hidden" name="travel_times" value="{{route.total_time}}">
-                <input type="hidden" name="transit_cities"
-                       value="{% for trains_qs in route.route %} {% for train in trains_qs %} {{train.id}} {% endfor %} {% endfor %}">
-            {% if forloop.first %}
-                <h5>Самый короткий маршрут</h5>
-            {% endif %}
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">Список поездов</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for trains_qs in route.route %}
-                    <tr>
-                        {% for train in trains_qs %}
-                            <td>Поезд <strong>{{train.name}}</strong>, следующий из {{train.from_city}} в {{train.to_city}}. Время в пути
-                                {{train.travel_time}}
-                            </td>
-                        {% endfor %}
-                    </tr>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Список поездов</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for trains_qs in route.route %}
+            <tr>
+                {% for train in trains_qs %}
+                <td>Поезд <strong>{{train.name}}</strong>, следующий из {{train.from_city}} в {{train.to_city}}. Время в
+                    пути
+                    {{train.travel_time}}
+                </td>
                 {% endfor %}
+            </tr>
+            {% endfor %}
             <tr>
             </tbody>
-            </table>
-            <p>Общее время в пути: {{route.total_time}}</p>
-            <button type="submit" class="btn btn-success">Сохранить маршрут</button>
-            </form>
-            <br/>
-            <br/>
-        {% endfor %}
+        </table>
+        <p>Общее время в пути: {{route.total_time}}</p>
+        <button type="submit" class="btn btn-success">Сохранить маршрут</button>
+    </form>
+    <br/>
+    <br/>
+    {% endfor %}
     {% endif %}
 </div>
 
@@ -56,3 +59,5 @@
     </div>
 </div>
 {% endblock %}
+{% block javascript %}
+<script src="{% static 'routes/js/form.js' %}"></script> {% endblock %}
