@@ -13,16 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from routes.views import home, find_routes, add_route, RouteDeleteView, RouteListView, RouteDetailView
 from travel.views import login_view, logout_view, registration_view
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('registration/', registration_view, name='registration'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('', home, name='home'),
     path('cities/', include(('cities.urls', 'city'))),
     path('trains/', include(('trains.urls', 'train'))),
@@ -31,4 +34,10 @@ urlpatterns = [
     path('routes/', RouteListView.as_view(), name='routes'),
     path('routes/<int:pk>/', RouteDetailView.as_view(), name='current_route'),
     path('routes/delete/<int:pk>/', RouteDeleteView.as_view(), name='delete_route'),
+
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [path('__debug__/', include(debug_toolbar.urls)), ] + urlpatterns

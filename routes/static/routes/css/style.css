@@ -1,3 +1,8 @@
 input[value=Найти] {
     border-radius: 5px;
 }
+
+body > div:nth-child(2) > form {
+    margin-top: 5em;
+    margin-left: 25em;
+}
