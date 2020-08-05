@@ -1,0 +1,16 @@
+form input[value='Войти'] {
+    margin-left: 9em;
+}
+
+.pass_reg_block {
+    margin-top: 2em;
+    margin-left: 4em;
+}
+
+.right-side {
+    margin-left: 1.7em;
+}
+
+.reset_forgot_block {
+    margin-top: 1em;
+}

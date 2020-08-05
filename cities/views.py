@@ -26,7 +26,7 @@ class CityDetailView(DetailView):
 
 
 class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    login_url = '/login/'
+    login_url = '/accounts/login/'
     form_class = CityForm
     model = City
     template_name = 'cities/create.html'
@@ -35,7 +35,7 @@ class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
 
 
 class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    login_url = '/login/'
+    login_url = '/accounts/login/'
     form_class = CityForm
     model = City
     template_name = 'cities/update.html'
@@ -45,7 +45,7 @@ class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 class CityDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     # form_class = CityForm
-    login_url = '/login/'
+    login_url = '/accounts/login/'
     model = City
     template_name = 'cities/delete.html'
     success_url = reverse_lazy('city:home')

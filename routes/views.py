@@ -13,7 +13,7 @@ from routes.models import Route
 from trains.models import Train
 
 
-@login_required(login_url='/login/')
+@login_required(login_url='/accounts/login/')
 def home(request):
     form = RouteForm()
     return render(request, 'routes/home.html', {'form': form})
@@ -184,7 +184,7 @@ class RouteListView(ListView):
 
 
 class RouteDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
-    login_url = 'login'
+    login_url = '/accounts/login/'
     model = Route
     template_name = 'routes/delete.html'
     success_url = reverse_lazy('routes')

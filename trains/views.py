@@ -26,7 +26,7 @@ class TrainDetailView(DetailView):
 
 
 class TrainCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
-    login_url = 'login'
+    login_url = '/accounts/login'
     form_class = TrainForm
     model = Train
     template_name = 'trains/create.html'
@@ -38,7 +38,7 @@ class TrainCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
 
 
 class TrainUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
-    login_url = 'login'
+    login_url = '/accounts/login'
     form_class = TrainForm
     model = Train
     template_name = 'trains/update.html'
@@ -47,7 +47,7 @@ class TrainUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 
 
 class TrainDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
-    login_url = 'login'
+    login_url = '/accounts/login'
     form_class = TrainForm
     model = Train
     template_name = 'trains/delete.html'
