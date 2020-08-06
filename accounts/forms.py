@@ -35,10 +35,11 @@ class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     password2 = forms.CharField(label='Повторите пароль',
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    email = forms.EmailField(max_length=200)
 
     class Meta:
         model = User
-        fields = ('username',)
+        fields = ('username', 'email')
 
     def clean_password2(self, *args, **kwargs):
         data = self.cleaned_data
