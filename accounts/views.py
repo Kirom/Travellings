@@ -19,7 +19,7 @@ from .tokens import account_activation_token
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'accounts/home.html')
 
 
 def login_view(request):
@@ -33,7 +33,7 @@ def login_view(request):
         next_post = request.POST.get('next')
         redirect_path = next_ or next_post or '/'
         return redirect(redirect_path)
-    return render(request, 'login.html', context={'form': form, })
+    return render(request, 'accounts/login.html', context={'form': form, })
 
 
 # class UserLoginView(LoginView):
@@ -85,10 +85,10 @@ def registration_view(request):
             # )
             # email.send()
 
-            return render(request, 'registration_done.html', {'new_user': new_user})
+            return render(request, 'accounts/registration_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
-    return render(request, 'registration.html', {'form': user_form})
+    return render(request, 'accounts/registration.html', {'form': user_form})
 
 
 def activate_account(request, uidb64, token):
@@ -101,23 +101,23 @@ def activate_account(request, uidb64, token):
         user.is_active = True
         user.save()
         # login(request, user)
-        return render(request, 'acc_activation_done.html', {'username': user})
+        return render(request, 'accounts/acc_activation_done.html', {'username': user})
     else:
-        return render(request, 'acc_activation_failed.html')
+        return render(request, 'accounts/acc_activation_failed.html')
 
 
 class UserPasswordResetView(PasswordResetView):
     template_name = 'password_reset_form.html'
     success_url = 'done/'
-    email_template_name = 'password_reset_email.html'
+    email_template_name = 'accounts/password_reset_email.html'
 
 
 class UserPasswordResetDoneView(PasswordResetDoneView):
-    template_name = 'password_reset_done.html'
+    template_name = 'accounts/password_reset_done.html'
 
 
 class UserPasswordResetConfirmView(PasswordResetConfirmView):
-    template_name = 'password_reset_confirm.html'
+    template_name = 'accounts/password_reset_confirm.html'
     success_url = 'reset/done/'
 
     def get_context_data(self, **kwargs):
@@ -128,7 +128,7 @@ class UserPasswordResetConfirmView(PasswordResetConfirmView):
 
 
 class UserPasswordResetCompleteView(PasswordResetCompleteView):
-    template_name = 'password_reset_complete.html'
+    template_name = 'accounts/password_reset_complete.html'
 # class RegistrationView(FormView):
 #     form_class = UserRegistrationForm
 #     success_url = "/login/"
