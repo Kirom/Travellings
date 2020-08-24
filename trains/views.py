@@ -21,7 +21,7 @@ def home(request):
 
 
 class TrainDetailView(DetailView):
-    queryset = Train.objects.all()
+    model = Train
     template_name = 'trains/current_train.html'
 
 

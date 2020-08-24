@@ -4,6 +4,8 @@ from django.contrib.auth.views import LoginView, PasswordResetView, PasswordRese
     PasswordResetCompleteView
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from django.shortcuts import render, redirect, resolve_url
 
@@ -69,19 +71,20 @@ def registration_view(request):
             new_user.is_active = False
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            current_site = get_current_site(request)
-            mail_subject = f'Активация аккаунта на {current_site}'
-            message = render_to_string('acc_activation_email.html', {
-                'user': new_user,
-                'domain': current_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(new_user.pk)),
-                'token': account_activation_token.make_token(new_user),
-            })
-            to_email = user_form.cleaned_data.get('email')
-            email = EmailMessage(
-                mail_subject, message, to=[to_email]
-            )
-            email.send()
+            # current_site = get_current_site(request)
+            # mail_subject = f'Активация аккаунта на {current_site}'
+            # message = render_to_string('acc_activation_email.html', {
+            #     'user': new_user,
+            #     'domain': current_site.domain,
+            #     'uid': urlsafe_base64_encode(force_bytes(new_user.pk)),
+            #     'token': account_activation_token.make_token(new_user),
+            # })
+            # to_email = user_form.cleaned_data.get('email')
+            # email = EmailMessage(
+            #     mail_subject, message, to=[to_email]
+            # )
+            # email.send()
+
             return render(request, 'registration_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
