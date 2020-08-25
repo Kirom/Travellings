@@ -107,7 +107,7 @@ def activate_account(request, uidb64, token):
 
 
 class UserPasswordResetView(PasswordResetView):
-    template_name = 'password_reset_form.html'
+    template_name = 'accounts/password_reset_form.html'
     success_url = 'done/'
     email_template_name = 'accounts/password_reset_email.html'
 

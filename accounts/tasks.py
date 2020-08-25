@@ -16,7 +16,7 @@ def send_verification_email(user_id):
     try:
         user = user_model.objects.get(pk=user_id)
         mail_subject = f'Активация аккаунта на travellings.ml'
-        message = render_to_string('acc_activation_email.html', {
+        message = render_to_string('accounts/acc_activation_email.html', {
             'user': user,
             'domain': 'travellings.ml',
             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
