@@ -14,26 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from routes.views import home, find_routes, add_route, RouteDeleteView, RouteListView, RouteDetailView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home, name='home'),
-    path('cities/', include(('cities.urls', 'city'))),
-    path('accounts/', include(('accounts.urls', 'accounts'))),
-    path('trains/', include(('trains.urls', 'train'))),
-    path('add_route/', add_route, name='add_route'),
-    path('find/', find_routes, name='find_routes'),
-    path('routes/', RouteListView.as_view(), name='routes'),
-    path('routes/<int:pk>/', RouteDetailView.as_view(), name='current_route'),
-    path('routes/delete/<int:pk>/', RouteDeleteView.as_view(), name='delete_route'),
-
-]
+                  path('admin/', admin.site.urls),
+                  path('', home, name='home'),
+                  path('cities/', include(('cities.urls', 'city'))),
+                  path('accounts/', include(('accounts.urls', 'accounts'))),
+                  path('trains/', include(('trains.urls', 'train'))),
+                  path('add_route/', add_route, name='add_route'),
+                  path('find/', find_routes, name='find_routes'),
+                  path('routes/', RouteListView.as_view(), name='routes'),
+                  path('routes/<int:pk>/', RouteDetailView.as_view(), name='current_route'),
+                  path('routes/delete/<int:pk>/', RouteDeleteView.as_view(), name='delete_route'),
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
 
-    urlpatterns = [path('__debug__/', include(debug_toolbar.urls)), ] + urlpatterns
+urlpatterns = [path('__debug__/', include(debug_toolbar.urls)), ] + urlpatterns
