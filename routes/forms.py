@@ -15,7 +15,7 @@ class RouteForm(forms.Form):
                                                     widget=forms.SelectMultiple(
                                                         attrs={
                                                             'class': 'js-example-placeholder-multiple js-states form-control',
-                                                            }),
+                                                        }),
                                                     required=False)
 
     travel_time = forms.IntegerField(label='Время в пути',

@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'trains/css/style.css' %}" rel="stylesheet"/>
+{% endblock %}
 {% block title %} Поезда {% endblock %}
 {% block content %}
 <h1 class="display-4">Создание поезда</h1>
