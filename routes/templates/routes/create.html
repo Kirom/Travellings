@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'routes/css/style.css' %}" rel="stylesheet"/>
+{% endblock %}
 {% block title %} Сохранение маршрута {% endblock %}
 {% block content %}
 <h1 class="display-4">Сохранить новый маршрут</h1>
-    <div class="col-md-4"><form action="" method="post">{% csrf_token %}{{ form.as_p }}</div>
+<div class="col-md-4">
     <div class="col-md-8">
+        <form action="" method="post">{% csrf_token %}{{ form.as_p }}
             <p>Маршрут из г. {{ from_city }} в г. {{ to_city }} продолжительностью {{ travel_times }}</p>
             <p>Маршрут состоит из: </p>
-                {% for d in description %}
-                    <p>{{ d }}</p>
-                {% endfor %}
-            <input type="submit" value="Сохранить">
+            {% for d in description %}
+            <p>{{ d }}</p>
+            {% endfor %}
+            <input class="btn btn-success" type="submit" value="Сохранить">
         </form>
     </div>
+</div>
 {% endblock %}

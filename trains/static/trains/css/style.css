@@ -1,3 +1,6 @@
 input[value="Создать"] {
     border-radius: 5px;
 }
+input[value="Подтвердить"] {
+    border-radius: 5px;
+}
