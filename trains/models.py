@@ -4,7 +4,8 @@ from cities.models import City
 
 
 class Train(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name='Поезд')
+    name = models.CharField(max_length=100, unique=True,
+                            error_messages={'unique': 'Поезд с таким номером уже существует'}, verbose_name='Поезд')
     from_city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Откуда', related_name='from_city')
     to_city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='Куда', related_name='to_city')
     travel_time = models.IntegerField(verbose_name='Время в пути', )
@@ -19,7 +20,7 @@ class Train(models.Model):
 
     def clean(self, *args, **kwargs):
         if self.from_city == self.to_city:
-            raise ValidationError('Неверный маршрут')
+            raise ValidationError('Город отправления и город назначения не могут совпадать.')
         qs = Train.objects.filter(from_city=self.from_city, to_city=self.to_city, travel_time=self.travel_time)
         if qs.exists():
             raise ValidationError('Такой поезд уже есть')
