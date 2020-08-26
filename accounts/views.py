@@ -71,19 +71,19 @@ def registration_view(request):
             new_user.is_active = False
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            # current_site = get_current_site(request)
-            # mail_subject = f'Активация аккаунта на {current_site}'
-            # message = render_to_string('acc_activation_email.html', {
-            #     'user': new_user,
-            #     'domain': current_site.domain,
-            #     'uid': urlsafe_base64_encode(force_bytes(new_user.pk)),
-            #     'token': account_activation_token.make_token(new_user),
-            # })
-            # to_email = user_form.cleaned_data.get('email')
-            # email = EmailMessage(
-            #     mail_subject, message, to=[to_email]
-            # )
-            # email.send()
+            current_site = get_current_site(request)
+            mail_subject = f'Активация аккаунта на {current_site}'
+            message = render_to_string('accounts/acc_activation_email.html', {
+                'user': new_user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(new_user.pk)),
+                'token': account_activation_token.make_token(new_user),
+            })
+            to_email = user_form.cleaned_data.get('email')
+            email = EmailMessage(
+                mail_subject, message, to=[to_email]
+            )
+            email.send()
 
             return render(request, 'accounts/registration_done.html', {'new_user': new_user})
     else:
