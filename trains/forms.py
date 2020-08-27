@@ -22,3 +22,6 @@ class TrainForm(forms.ModelForm):
     class Meta(object):
         model = Train
         fields = ('name', 'from_city', 'to_city', 'travel_time',)
+
+    def clean_name(self):
+        return self.cleaned_data['name'].upper()
