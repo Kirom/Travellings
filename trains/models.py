@@ -21,7 +21,8 @@ class Train(models.Model):
     def clean(self, *args, **kwargs):
         if self.from_city == self.to_city:
             raise ValidationError('Город отправления и город назначения не могут совпадать.')
-        qs = Train.objects.filter(from_city=self.from_city, to_city=self.to_city, travel_time=self.travel_time)
+        qs = Train.objects.filter(name=self.name, from_city=self.from_city, to_city=self.to_city,
+                                  travel_time=self.travel_time)
         if qs.exists():
             raise ValidationError('Такой поезд уже есть')
         return super(Train, self).clean(*args, **kwargs)
