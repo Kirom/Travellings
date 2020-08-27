@@ -10,3 +10,6 @@ class CityForm(forms.ModelForm):
     class Meta(object):
         model = City
         fields = ('name',)
+
+    def clean_name(self):
+        return self.cleaned_data['name'].capitalize()
