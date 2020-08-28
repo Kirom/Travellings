@@ -1,5 +1,8 @@
 input[value=Найти] {
     border-radius: 5px;
+    border-color: #aaaaaa;
+    border-width: 1px;
+    background-color: white;
 }
 
 body > div:nth-child(2) > form {
